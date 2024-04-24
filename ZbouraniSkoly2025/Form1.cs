@@ -46,10 +46,10 @@ namespace ZbouraniSkoly2025
             mobjBitmapGraphics = Graphics.FromImage(mobjMainBitmap);
 
             // nastaveni kulicky
-            mobjBall = new clsKulicka(2, 2, 13, 3, 4, mobjBitmapGraphics);
+            mobjBall = new clsKulicka(2, 2, 13, 3, 3, mobjBitmapGraphics);
 
             // nastaveni plosiny
-            mobjPlosina = new clsPlosina(300, 300, 50, 15, 4, mobjBitmapGraphics);
+            mobjPlosina = new clsPlosina(300, 300, 100, 10, 4, mobjBitmapGraphics);
 
             // nastaveni timeru
             tmrRedraw.Interval = 30;

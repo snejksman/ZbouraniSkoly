@@ -52,7 +52,7 @@ namespace ZbouraniSkoly2025
         }
 
         //
-        // kolize koule
+        // kolize koule s hranami 
         //
         public void KolizeBall()
         {
@@ -67,10 +67,18 @@ namespace ZbouraniSkoly2025
                 mintBallPosunX = mintBallPosunX * (-1);
 
             if (mintBallX < 0)
-                mintBallPosunX = mintBallPosunX * (-1);
+                mintBallPosunX = mintBallPosunX * (-1);  
+        }
 
-            // kolize s plosinou
-            
+        //
+        // kolize koule s plosinou
+        //
+        public void KolizeBallAndPlosina(int mintPlosinaX, int mintPlosinaY, int intPlosinaWidth)
+        {
+            if (mintBallY > mintPlosinaY && mintBallX < mintPlosinaX && mintPlosinaX + intPlosinaWidth < mintBallX)
+            {
+                mintBallPosunY = mintBallPosunY * (-1);
+            }
         }
     }
 }

@@ -23,6 +23,9 @@ namespace ZbouraniSkoly2025
         // barva plosiny
         Brush mobjPlosinaBrush;
 
+        // trida plosiny pro kolize
+        clsKulicka mobjKulicka;
+
         //
         // konstruktor
         //
@@ -52,7 +55,7 @@ namespace ZbouraniSkoly2025
         // kolize plosiny s kulickou
         public void KolizePlosina()
         {
-
+            mobjKulicka.KolizeBallAndPlosina(mintPlosinaX, mintPlosinaY, mintPlosinaWidth);
         }
 
         // ovladani plosiny
