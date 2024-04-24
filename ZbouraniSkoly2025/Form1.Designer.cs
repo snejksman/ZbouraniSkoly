@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.pbPlatno = new System.Windows.Forms.PictureBox();
             this.tmrRedraw = new System.Windows.Forms.Timer(this.components);
+            this.tmrPlosina = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pbPlatno)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,6 +48,10 @@
             // 
             this.tmrRedraw.Tick += new System.EventHandler(this.tmrRedraw_Tick);
             // 
+            // tmrPlosina
+            // 
+            this.tmrPlosina.Tick += new System.EventHandler(this.tmrPlosina_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -57,6 +62,7 @@
             this.Name = "Form1";
             this.Text = "Zbourani Skoly";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pbPlatno)).EndInit();
             this.ResumeLayout(false);
 
@@ -66,6 +72,7 @@
 
         private System.Windows.Forms.PictureBox pbPlatno;
         private System.Windows.Forms.Timer tmrRedraw;
+        private System.Windows.Forms.Timer tmrPlosina;
     }
 }
 

@@ -19,13 +19,23 @@ namespace ZbouraniSkoly2025
         // grafika pro picturebox
         Graphics mobjPlatnoGraphics;
 
-        // souradnice kulicky
-        int mintBallX, mintBallY;
+        // kulicka
+        clsKulicka mobjBall;
+
+
+
+        // souradnice plosiny
+        int mintPlosinaX, mintPlosinaY;
+        int mintPlosinaWidth, mintPlosinaHeight;
+
+
 
         public Form1()
         {
             InitializeComponent();
         }
+
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -36,12 +46,17 @@ namespace ZbouraniSkoly2025
             mobjMainBitmap = new Bitmap(pbPlatno.Width, pbPlatno.Height);
             mobjBitmapGraphics = Graphics.FromImage(mobjMainBitmap);
 
-            // nastaveni koule
-            mintBallX = 0;
-            mintBallY = 0;
+            // nastaveni kulicky
+            mobjBall = new clsKulicka(2, 2, 13, 13, 3, 4, mobjBitmapGraphics);
+
+            // nastaveni plosiny
+            mintPlosinaX = 500;
+            mintPlosinaY = 500;
+            mintPlosinaWidth = 150;
+            mintPlosinaHeight = 20;
 
             // nastaveni timeru
-            tmrRedraw.Interval = 5;
+            tmrRedraw.Interval = 30;
             tmrRedraw.Enabled = true;
         }
         //
@@ -49,15 +64,40 @@ namespace ZbouraniSkoly2025
         //
         private void tmrRedraw_Tick(object sender, EventArgs e)
         {
+            // vymazat predchozi kulicku
+            mobjBitmapGraphics.Clear(Color.White);
+
             // nakresli kolecko na bitmapu
-            mobjBitmapGraphics.FillEllipse(Brushes.CadetBlue, mintBallX, mintBallY, 10, 10);
+            mobjBall.DrawBall();
 
             // posun kulicky
-            mintBallX = mintBallX + 5;
-            mintBallY = mintBallY + 5; 
+            mobjBall.MoveBall();
 
             // prekresli bitmapu na platno
             mobjPlatnoGraphics.DrawImage(mobjMainBitmap, 0, 0);
+
+            // kolize
+            mobjBall.KolizeBall();
+        }
+
+        //
+        // plosina
+        //
+        private void tmrPlosina_Tick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs Klavesa)
+        {
+
+            switch (Klavesa.KeyCode) 
+            {
+                case Keys.Left:
+
+                    break;
+
+            }
         }
     }
 }
