@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -22,13 +23,11 @@ namespace ZbouraniSkoly2025
         // kulicka
         clsKulicka mobjBall;
 
-
-
         // souradnice plosiny
-        int mintPlosinaX, mintPlosinaY;
-        int mintPlosinaWidth, mintPlosinaHeight;
+        clsPlosina mobjPlosina;
 
-
+        // mackam klavesnici
+        bool mbjOvladam;
 
         public Form1()
         {
@@ -47,13 +46,10 @@ namespace ZbouraniSkoly2025
             mobjBitmapGraphics = Graphics.FromImage(mobjMainBitmap);
 
             // nastaveni kulicky
-            mobjBall = new clsKulicka(2, 2, 13, 13, 3, 4, mobjBitmapGraphics);
+            mobjBall = new clsKulicka(2, 2, 13, 3, 4, mobjBitmapGraphics);
 
             // nastaveni plosiny
-            mintPlosinaX = 500;
-            mintPlosinaY = 500;
-            mintPlosinaWidth = 150;
-            mintPlosinaHeight = 20;
+            mobjPlosina = new clsPlosina(300, 300, 50, 15, 4, mobjBitmapGraphics);
 
             // nastaveni timeru
             tmrRedraw.Interval = 30;
@@ -64,40 +60,49 @@ namespace ZbouraniSkoly2025
         //
         private void tmrRedraw_Tick(object sender, EventArgs e)
         {
-            // vymazat predchozi kulicku
+            // vymazat platno a grafiku
             mobjBitmapGraphics.Clear(Color.White);
 
-            // nakresli kolecko na bitmapu
+            // nakresli kulicku na bitmapu a jeji kolize
             mobjBall.DrawBall();
-
-            // posun kulicky
             mobjBall.MoveBall();
-
-            // prekresli bitmapu na platno
-            mobjPlatnoGraphics.DrawImage(mobjMainBitmap, 0, 0);
-
-            // kolize
             mobjBall.KolizeBall();
-        }
 
-        //
-        // plosina
-        //
-        private void tmrPlosina_Tick(object sender, EventArgs e)
-        {
+            // nakresli plosinu a jeji kolize
+            mobjPlosina.DrawPlosina();
+            if (mbjOvladam == true)
+                mobjPlosina.MovePlosina();
+            mobjPlosina.KolizePlosina();
 
+            // nakresleni na platno
+            mobjPlatnoGraphics.DrawImage(mobjMainBitmap, 0, 0);
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs Klavesa)
         {
-
-            switch (Klavesa.KeyCode) 
+            try
             {
-                case Keys.Left:
-
-                    break;
-
+                switch (Klavesa.KeyCode)
+                {
+                    case Keys.Left:
+                        mobjPlosina.PosunLeft();
+                        mbjOvladam = true;
+                        break;
+                    case Keys.Right:
+                        mobjPlosina.PosunRight();
+                        mbjOvladam = true;
+                        break;
+                }
             }
+            catch (Exception ex)
+            {
+                mbjOvladam = false;
+            }
+        }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            mbjOvladam = false;
         }
     }
 }

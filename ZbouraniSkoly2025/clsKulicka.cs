@@ -14,7 +14,7 @@ namespace ZbouraniSkoly2025
 
         // souradnice kulicky
         int mintBallX, mintBallY;
-        int mintBallWidth, mintBallHeight;
+        int mintBallRadius;
 
         // posun kulicky
         int mintBallPosunX, mintBallPosunY;
@@ -22,12 +22,11 @@ namespace ZbouraniSkoly2025
         //
         // konstruktor
         //
-        public clsKulicka(int intBallX, int intBallY, int intBallWidth, int intBallHeight, int intBallPosunX, int intBallPosunY, Graphics objPlatno)
+        public clsKulicka(int intBallX, int intBallY, int intBallRadius, int intBallPosunX, int intBallPosunY, Graphics objPlatno)
         {
             mintBallX = intBallX;
             mintBallY = intBallY;
-            mintBallWidth = intBallWidth;
-            mintBallHeight = intBallHeight;
+            mintBallRadius = intBallRadius;
             mintBallPosunX = intBallPosunX;
             mintBallPosunY = intBallPosunY;
             mobjPlatno = objPlatno;
@@ -38,33 +37,40 @@ namespace ZbouraniSkoly2025
         //
         public void DrawBall()
         {
-            mobjPlatno.FillEllipse(Brushes.BlueViolet, mintBallX, mintBallY, mintBallWidth, mintBallHeight);
+            mobjPlatno.FillEllipse(Brushes.BlueViolet, mintBallX, mintBallY, mintBallRadius, mintBallRadius);
         }
 
         //
         // posunuti koule
         //
-
         public void MoveBall()
         {
+
             // posun kulicky
             mintBallX = mintBallX + mintBallPosunX;
             mintBallY = mintBallY + mintBallPosunY;
         }
 
+        //
+        // kolize koule
+        //
         public void KolizeBall()
         {
-            if (mintBallY > mobjPlatno.VisibleClipBounds.Height - mintBallHeight)
+            // kolize s hranami obrazovky
+            if (mintBallY > mobjPlatno.VisibleClipBounds.Height - mintBallRadius)
                 mintBallPosunY = mintBallPosunY * (-1);
 
             if (mintBallY < 0)
                 mintBallPosunY = mintBallPosunY * (-1);
 
-            if (mintBallX > mobjPlatno.VisibleClipBounds.Width - mintBallWidth)
+            if (mintBallX > mobjPlatno.VisibleClipBounds.Width - mintBallRadius)
                 mintBallPosunX = mintBallPosunX * (-1);
 
             if (mintBallX < 0)
                 mintBallPosunX = mintBallPosunX * (-1);
+
+            // kolize s plosinou
+            
         }
     }
 }
