@@ -72,7 +72,7 @@ namespace ZbouraniSkoly2025
             mobjPlosina.DrawPlosina();
             if (mbjOvladam == true)
                 mobjPlosina.MovePlosina();
-            mobjPlosina.KolizePlosina();
+            mobjBall.KolizeBallAndPlosina(mobjPlosina.pintPlosinaX, mobjPlosina.pintPlosinaY, mobjPlosina.pintPlosinaWidth);
 
             // nakresleni na platno
             mobjPlatnoGraphics.DrawImage(mobjMainBitmap, 0, 0);

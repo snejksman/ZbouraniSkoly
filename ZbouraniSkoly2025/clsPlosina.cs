@@ -10,6 +10,9 @@ namespace ZbouraniSkoly2025
 {
     internal class clsPlosina
     {
+        //integery pro pouziti venku
+        public int pintPlosinaX, pintPlosinaY, pintPlosinaWidth;
+
         // grafika
         Graphics mobjGrafika;
 
@@ -31,13 +34,16 @@ namespace ZbouraniSkoly2025
         //
         public clsPlosina(int intPlosinaX, int intPlosinaY, int intPlosinaWidth, int intPlosinaHeight, int intPlosinaPosun, Graphics objGrafika)
         {
-            mintPlosinaX = intPlosinaX;
-            mintPlosinaY = intPlosinaY;
-            mintPlosinaWidth = intPlosinaWidth;
+            pintPlosinaX = mintPlosinaX = intPlosinaX;
+            pintPlosinaY = mintPlosinaY = intPlosinaY;
+            pintPlosinaWidth = mintPlosinaWidth = intPlosinaWidth;
             mintPlosinaHeight = intPlosinaHeight;
             mintPlosinaPosun = intPlosinaPosun;
             mobjGrafika = objGrafika;
             mobjPlosinaBrush = new SolidBrush(Color.Green);
+            // nastaveni kulicky
+            mobjKulicka = new clsKulicka(2, 2, 13, 3, 3, mobjGrafika);
+
         }
 
         // posune souradnice plosiny
@@ -55,7 +61,7 @@ namespace ZbouraniSkoly2025
         // kolize plosiny s kulickou
         public void KolizePlosina()
         {
-            mobjKulicka.KolizeBallAndPlosina(mintPlosinaX, mintPlosinaY, mintPlosinaWidth);
+
         }
 
         // ovladani plosiny

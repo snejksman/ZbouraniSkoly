@@ -9,6 +9,8 @@ namespace ZbouraniSkoly2025
 {
     internal class clsKulicka
     {
+
+
         // kreslici platno
         Graphics mobjPlatno;
 
@@ -75,9 +77,15 @@ namespace ZbouraniSkoly2025
         //
         public void KolizeBallAndPlosina(int mintPlosinaX, int mintPlosinaY, int intPlosinaWidth)
         {
-            if (mintBallY > mintPlosinaY && mintBallX < mintPlosinaX && mintPlosinaX + intPlosinaWidth < mintBallX)
+            if (mintBallY > mintPlosinaY)
             {
-                mintBallPosunY = mintBallPosunY * (-1);
+                if (mintBallX > mintPlosinaX)
+                {
+                    if (mintBallX < mintPlosinaX + intPlosinaWidth)
+                    {
+                        mintBallPosunY = mintBallPosunY * (-1);
+                    }
+                }
             }
         }
     }
