@@ -26,9 +26,6 @@ namespace ZbouraniSkoly2025
         // barva plosiny
         Brush mobjPlosinaBrush;
 
-        // trida plosiny pro kolize
-        clsKulicka mobjKulicka;
-
         //
         // konstruktor
         //
@@ -41,8 +38,6 @@ namespace ZbouraniSkoly2025
             mintPlosinaPosun = intPlosinaPosun;
             mobjGrafika = objGrafika;
             mobjPlosinaBrush = new SolidBrush(Color.Green);
-            // nastaveni kulicky
-            mobjKulicka = new clsKulicka(2, 2, 13, 3, 3, mobjGrafika);
 
         }
 
