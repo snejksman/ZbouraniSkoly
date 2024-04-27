@@ -62,7 +62,6 @@ namespace ZbouraniSkoly2025
             // kolize s hranami obrazovky
             if (mintBallY > mobjPlatno.VisibleClipBounds.Height - mintBallRadius)
                 mintBallPosunY = mintBallPosunY * (-1);
-                MessageBox.Show("imagine prohrat XDD");
 
             if (mintBallY < 0)
                 mintBallPosunY = mintBallPosunY * (-1);
