@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ZbouraniSkoly2025
 {
@@ -61,6 +62,7 @@ namespace ZbouraniSkoly2025
             // kolize s hranami obrazovky
             if (mintBallY > mobjPlatno.VisibleClipBounds.Height - mintBallRadius)
                 mintBallPosunY = mintBallPosunY * (-1);
+                MessageBox.Show("imagine prohrat XDD");
 
             if (mintBallY < 0)
                 mintBallPosunY = mintBallPosunY * (-1);
@@ -75,13 +77,13 @@ namespace ZbouraniSkoly2025
         //
         // kolize koule s plosinou
         //
-        public void KolizeBallAndPlosina(int mintPlosinaX, int mintPlosinaY, int intPlosinaWidth)
+        public void KolizeBallAndPlosina(int PlosinaX, int PlosinaY, int PlosinaWidth)
         {
-            if (mintBallY > mintPlosinaY)
+            if (mintBallY + mintBallRadius > PlosinaY)
             {
-                if (mintBallX > mintPlosinaX)
+                if (mintBallX > PlosinaX)
                 {
-                    if (mintBallX < mintPlosinaX + intPlosinaWidth)
+                    if (mintBallX < PlosinaX + PlosinaWidth)
                     {
                         mintBallPosunY = mintBallPosunY * (-1);
                     }

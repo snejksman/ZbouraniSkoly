@@ -50,18 +50,13 @@ namespace ZbouraniSkoly2025
         public void MovePlosina()
         {
             mintPlosinaX = mintPlosinaX + mintPlosinaPosun;
+            pintPlosinaX = mintPlosinaX;
         }
 
         // nakresli plosinu
         public void DrawPlosina()
         {
             mobjGrafika.FillRectangle(mobjPlosinaBrush, mintPlosinaX, mintPlosinaY, mintPlosinaWidth, mintPlosinaHeight);
-        }
-
-        // kolize plosiny s kulickou
-        public void KolizePlosina()
-        {
-
         }
 
         // ovladani plosiny
