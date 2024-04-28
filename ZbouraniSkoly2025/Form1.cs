@@ -13,6 +13,8 @@ namespace ZbouraniSkoly2025
 {
     public partial class Form1 : Form
     {
+      
+
         // hlavni nastroje pro 
         Bitmap mobjMainBitmap;
         Graphics mobjBitmapGraphics;
@@ -20,11 +22,14 @@ namespace ZbouraniSkoly2025
         // grafika pro picturebox
         Graphics mobjPlatnoGraphics;
 
-        // kulicka
+        // vytvoreni kulicky
         clsKulicka mobjBall;
 
-        // souradnice plosiny
+        // vytvoreni plosiny
         clsPlosina mobjPlosina;
+
+        // vytvoreni cihly
+        clsCihla mobjCihla;
 
         // mackam klavesnici
         bool mbjOvladam;
@@ -38,6 +43,7 @@ namespace ZbouraniSkoly2025
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
             // vytvoreni grafiky v pictureboxu
             mobjPlatnoGraphics = pbPlatno.CreateGraphics();
             
@@ -49,12 +55,16 @@ namespace ZbouraniSkoly2025
             mobjBall = new clsKulicka(2, 2, 13, 3, 3, mobjBitmapGraphics);
 
             // nastaveni plosiny
-            mobjPlosina = new clsPlosina(500, 500, 100, 10, 4, mobjBitmapGraphics);
+            mobjPlosina = new clsPlosina((int)(mobjPlatnoGraphics.VisibleClipBounds.Width / 2), 500, 100, 10, 4, mobjBitmapGraphics);
+
+            // nastaveni cihel
+            mobjCihla = new clsCihla(100, 100, 100, 20, 150, mobjBitmapGraphics);
 
             // nastaveni timeru
             tmrRedraw.Interval = 30;
             tmrRedraw.Enabled = true;
         }
+
         //
         // prekresleni obrazu pri ticku timeru
         //
@@ -73,6 +83,9 @@ namespace ZbouraniSkoly2025
             if (mbjOvladam == true)
                 mobjPlosina.MovePlosina();
             mobjBall.KolizeBallAndPlosina(mobjPlosina.pintPlosinaX, mobjPlosina.pintPlosinaY, mobjPlosina.pintPlosinaWidth);
+
+            // nakresli cihly
+            mobjCihla.DrawCihla(1);
 
             // nakresleni na platno
             mobjPlatnoGraphics.DrawImage(mobjMainBitmap, 0, 0);
