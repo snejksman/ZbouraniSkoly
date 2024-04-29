@@ -13,7 +13,9 @@ namespace ZbouraniSkoly2025
         // kreslici platno
         Graphics mobjGrafika;
 
-        // souradnice kulicky
+        Rectangle[] mobjRectangle;
+
+        // souradnice cihly
         int mintCihlaX, mintCihlaY;
         int mintCihlaWidth, mintCihlaHeight;
         int mintCihlaRozestup;
@@ -33,10 +35,21 @@ namespace ZbouraniSkoly2025
             mobjGrafika = objGrafika;
             mobjCihlaBrush = new SolidBrush(Color.OrangeRed);
             mintCihlaRozestup = intCihlaRozestup;
+
+            Rectangle[] objRectangle = 
+                {
+                    new Rectangle(mintCihlaX, mintCihlaY, mintCihlaWidth, mintCihlaHeight), 
+                    new Rectangle(mintCihlaX + mintCihlaRozestup, mintCihlaY, mintCihlaWidth, mintCihlaHeight),
+                    new Rectangle(mintCihlaX + mintCihlaRozestup * 2, mintCihlaY, mintCihlaWidth, mintCihlaHeight),
+                    new Rectangle(mintCihlaX + mintCihlaRozestup * 3, mintCihlaY, mintCihlaWidth, mintCihlaHeight),
+                    new Rectangle(mintCihlaX + mintCihlaRozestup * 4, mintCihlaY, mintCihlaWidth, mintCihlaHeight),
+                };
+            mobjRectangle = objRectangle;
         }
-        public void DrawCihla(int length)
+        public void DrawCihla()
         {
-            mobjGrafika.FillRectangle(mobjCihlaBrush, mintCihlaX, mintCihlaY, mintCihlaWidth, mintCihlaHeight);
+            
+            mobjGrafika.FillRectangles(mobjCihlaBrush, mobjRectangle);
 
         }
     }

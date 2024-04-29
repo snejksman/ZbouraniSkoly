@@ -85,7 +85,7 @@ namespace ZbouraniSkoly2025
             mobjBall.KolizeBallAndPlosina(mobjPlosina.pintPlosinaX, mobjPlosina.pintPlosinaY, mobjPlosina.pintPlosinaWidth);
 
             // nakresli cihly
-            mobjCihla.DrawCihla(1);
+            mobjCihla.DrawCihla();
 
             // nakresleni na platno
             mobjPlatnoGraphics.DrawImage(mobjMainBitmap, 0, 0);
