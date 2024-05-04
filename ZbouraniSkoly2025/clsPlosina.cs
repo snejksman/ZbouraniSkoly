@@ -10,7 +10,7 @@ namespace ZbouraniSkoly2025
 {
     internal class clsPlosina
     {
-        //integery pro pouziti venku
+        // integery pro pouziti venku
         public int pintPlosinaX, pintPlosinaY, pintPlosinaWidth;
 
         // grafika
@@ -38,7 +38,6 @@ namespace ZbouraniSkoly2025
             mintPlosinaPosun = intPlosinaPosun;
             mobjGrafika = objGrafika;
             mobjPlosinaBrush = new SolidBrush(Color.Green);
-
         }
 
         // posune souradnice plosiny

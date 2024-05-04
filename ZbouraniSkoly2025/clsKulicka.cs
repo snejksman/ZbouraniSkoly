@@ -10,7 +10,8 @@ namespace ZbouraniSkoly2025
 {
     internal class clsKulicka
     {
-
+        // integery pro pouziti venku
+        public int pintBallX, pintBallY;
 
         // kreslici platno
         Graphics mobjPlatno;

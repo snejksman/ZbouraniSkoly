@@ -52,13 +52,13 @@ namespace ZbouraniSkoly2025
             mobjBitmapGraphics = Graphics.FromImage(mobjMainBitmap);
 
             // nastaveni kulicky
-            mobjBall = new clsKulicka(2, 2, 13, 3, 3, mobjBitmapGraphics);
+            mobjBall = new clsKulicka(350, 350, 13, 3, 3, mobjBitmapGraphics);
 
             // nastaveni plosiny
             mobjPlosina = new clsPlosina((int)(mobjPlatnoGraphics.VisibleClipBounds.Width / 2), 500, 100, 10, 4, mobjBitmapGraphics);
 
             // nastaveni cihel
-            mobjCihla = new clsCihla(100, 100, 100, 20, 150, mobjBitmapGraphics);
+            mobjCihla = new clsCihla(7, 4, 100, 100, 120, 40, 130, 50, mobjBitmapGraphics);
 
             // nastaveni timeru
             tmrRedraw.Interval = 30;
@@ -86,6 +86,7 @@ namespace ZbouraniSkoly2025
 
             // nakresli cihly
             mobjCihla.DrawCihla();
+            mobjCihla.KolizeCihla(mobjBall.pintBallX, mobjBall.pintBallY);
 
             // nakresleni na platno
             mobjPlatnoGraphics.DrawImage(mobjMainBitmap, 0, 0);

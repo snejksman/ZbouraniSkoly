@@ -4,29 +4,32 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ZbouraniSkoly2025
 {
     internal class clsCihla
     {
+        public List<Rectangle> listRect = new List<Rectangle>();
 
         // kreslici platno
         Graphics mobjGrafika;
 
-        Rectangle[] mobjRectangle;
+        Rectangle mobjCihlaRect;
 
         // souradnice cihly
         int mintCihlaX, mintCihlaY;
         int mintCihlaWidth, mintCihlaHeight;
-        int mintCihlaRozestup;
+        int mintCihlaRozestupX, mintCihlaRozestupY;
 
         // barva cihel
         Brush mobjCihlaBrush;
+        Brush mobjCihlaClear;
 
         //
         // konstruktor
         //
-        public clsCihla(int intCihlaX, int intCihlaY, int intCihlaWidth, int intCihlaHeight, int intCihlaRozestup, Graphics objGrafika) 
+        public clsCihla(int intPocetCihelX, int intPocetCihelY, int intCihlaX, int intCihlaY, int intCihlaWidth, int intCihlaHeight, int intCihlaRozestupX, int intCihlaRozestupY, Graphics objGrafika) 
         {
             mintCihlaHeight = intCihlaHeight;
             mintCihlaWidth = intCihlaWidth;
@@ -34,23 +37,45 @@ namespace ZbouraniSkoly2025
             mintCihlaY = intCihlaY;
             mobjGrafika = objGrafika;
             mobjCihlaBrush = new SolidBrush(Color.OrangeRed);
-            mintCihlaRozestup = intCihlaRozestup;
+            mintCihlaRozestupX = intCihlaRozestupX;
+            mintCihlaRozestupY = intCihlaRozestupY;
+            mobjCihlaRect = new Rectangle(mintCihlaX, mintCihlaY, mintCihlaWidth, mintCihlaHeight);
 
-            Rectangle[] objRectangle = 
+            for (int x = 0; x < intPocetCihelX; x++)
+            {
+                mobjCihlaRect.X = x * mintCihlaRozestupX + mintCihlaRozestupX;
+                for (int y = 0; y < intPocetCihelY; y++)
                 {
-                    new Rectangle(mintCihlaX, mintCihlaY, mintCihlaWidth, mintCihlaHeight), 
-                    new Rectangle(mintCihlaX + mintCihlaRozestup, mintCihlaY, mintCihlaWidth, mintCihlaHeight),
-                    new Rectangle(mintCihlaX + mintCihlaRozestup * 2, mintCihlaY, mintCihlaWidth, mintCihlaHeight),
-                    new Rectangle(mintCihlaX + mintCihlaRozestup * 3, mintCihlaY, mintCihlaWidth, mintCihlaHeight),
-                    new Rectangle(mintCihlaX + mintCihlaRozestup * 4, mintCihlaY, mintCihlaWidth, mintCihlaHeight),
-                };
-            mobjRectangle = objRectangle;
+                    mobjCihlaRect.Y = y * mintCihlaRozestupY + mintCihlaRozestupY;
+                    listRect.Add(mobjCihlaRect);
+                }
+            }
+
         }
+        //
+        // nakresleni cihel
+        //
         public void DrawCihla()
         {
-            
-            mobjGrafika.FillRectangles(mobjCihlaBrush, mobjRectangle);
+            foreach (Rectangle rect in listRect)
+            {
+                mobjGrafika.FillRectangle(mobjCihlaBrush, rect);
+            }
+        }
 
+        public void KolizeCihla(int intBallX, int intBallY)
+        {
+            foreach (Rectangle rect in listRect)
+            {
+                if (mobjCihlaRect.Y + mintCihlaHeight > intBallY)
+                {
+                    if (mobjCihlaRect.X > intBallX && mobjCihlaRect.X + mintCihlaWidth < intBallY)
+                    {
+                        mobjCihlaClear = new SolidBrush(Color.White);
+                        mobjGrafika.FillRectangle(mobjCihlaClear, rect);
+                    }
+                }
+            }
         }
     }
 }
