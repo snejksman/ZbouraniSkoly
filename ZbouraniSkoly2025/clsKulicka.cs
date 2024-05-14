@@ -90,5 +90,23 @@ namespace ZbouraniSkoly2025
                 }
             }
         }
+        //
+        // kolize kulicky s cihalmi
+        //
+        public void KolizeBallAndCihla(int intCihlaX, int intCihlaY, int intCihlaWidth, int intCihlaHeight)
+        {
+
+            /*if (mintBallY + mintBallRadius < intCihlaY + intCihlaHeight)
+            {
+                if (mintBallX > intCihlaX)
+                {
+                    if (mintBallX < intCihlaX + intCihlaWidth)
+                    {
+                        mintBallPosunY = mintBallPosunY * (-1);
+                        mintBallPosunX = mintBallPosunX + mintRandomAngle;
+                    }
+                }
+            }*/
+        }
     }
 }
