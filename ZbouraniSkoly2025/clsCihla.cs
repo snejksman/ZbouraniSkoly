@@ -62,20 +62,5 @@ namespace ZbouraniSkoly2025
                 mobjGrafika.FillRectangle(mobjCihlaBrush, rect);
             }
         }
-
-        public void KolizeCihla(int intBallX, int intBallY)
-        {
-            foreach (Rectangle rect in listRect)
-            {
-                if (mobjCihlaRect.Y + mintCihlaHeight > intBallY)
-                {
-                    if (mobjCihlaRect.X > intBallX && mobjCihlaRect.X + mintCihlaWidth < intBallY)
-                    {
-                        mobjCihlaClear = new SolidBrush(Color.White);
-                        mobjGrafika.FillRectangle(mobjCihlaClear, rect);
-                    }
-                }
-            }
-        }
     }
 }

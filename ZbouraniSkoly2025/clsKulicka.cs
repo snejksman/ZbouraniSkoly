@@ -22,6 +22,8 @@ namespace ZbouraniSkoly2025
 
         // posun kulicky
         int mintBallPosunX, mintBallPosunY;
+        int mintRandomPosun;
+        Random rndPosun;
 
         //
         // konstruktor
@@ -49,7 +51,6 @@ namespace ZbouraniSkoly2025
         //
         public void MoveBall()
         {
-
             // posun kulicky
             mintBallX = mintBallX + mintBallPosunX;
             mintBallY = mintBallY + mintBallPosunY;
@@ -85,7 +86,10 @@ namespace ZbouraniSkoly2025
                 {
                     if (mintBallX < PlosinaX + PlosinaWidth)
                     {
+                        rndPosun = new Random();
+                        mintRandomPosun = rndPosun.Next(-2, 2);
                         mintBallPosunY = mintBallPosunY * (-1);
+                        mintBallPosunX = mintBallPosunX + mintRandomPosun;
                     }
                 }
             }
@@ -96,17 +100,17 @@ namespace ZbouraniSkoly2025
         public void KolizeBallAndCihla(int intCihlaX, int intCihlaY, int intCihlaWidth, int intCihlaHeight)
         {
 
-            /*if (mintBallY + mintBallRadius < intCihlaY + intCihlaHeight)
+            if (mintBallY + mintBallRadius < intCihlaY + intCihlaHeight)
             {
                 if (mintBallX > intCihlaX)
                 {
                     if (mintBallX < intCihlaX + intCihlaWidth)
                     {
                         mintBallPosunY = mintBallPosunY * (-1);
-                        mintBallPosunX = mintBallPosunX + mintRandomAngle;
+                        mintBallPosunX = mintBallPosunX + mintRandomPosun;
                     }
                 }
-            }*/
+            }
         }
     }
 }
