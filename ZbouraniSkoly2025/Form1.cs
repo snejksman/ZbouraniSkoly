@@ -86,7 +86,7 @@ namespace ZbouraniSkoly2025
 
             // nakresli cihly
             mobjCihla.DrawCihla();
-            KolizeBallAndCihla();
+            TestKolizeBallCihla();
 
             // nakresleni na platno
             mobjPlatnoGraphics.DrawImage(mobjMainBitmap, 0, 0);
@@ -121,7 +121,7 @@ namespace ZbouraniSkoly2025
         //
         // kolize kulicky s cihalmi - nevim proc nefunguje v clsKulicce ale tady funguje tak to necham tady protoze sem linej to predelavat
         //
-        public void KolizeBallAndCihla()
+        /*public void KolizeBallAndCihla()
         {
             foreach (Rectangle rect in mobjCihla.listRect)
             {
@@ -138,21 +138,22 @@ namespace ZbouraniSkoly2025
                     }
                 }
             }  
-        }
+        }*/
 
 
 
-        /* private bool TestKolizeBallCihla()
+        private void TestKolizeBallCihla()
         {
             foreach (Rectangle rect in mobjCihla.listRect)
             {
                 Rectangle lobjPrekryv;
                 lobjPrekryv = Rectangle.Intersect(rect, mobjBall.mobjBallRect);
-                if (lobjPrekryv.Width == 0 && lobjPrekryv.Height == 0)
-                    return false;
-                else return true;
-
+                if (lobjPrekryv.Width > 0 && lobjPrekryv.Height > 0)
+                {
+                    mobjBall.mintBallPosunY = mobjBall.mintBallPosunY * (-1);
+                    mobjBall.mintBallPosunX = mobjBall.mintBallPosunX + mobjBall.mintRandomPosun;
+                }
             }
-        }*/
+        }
     }
 }
