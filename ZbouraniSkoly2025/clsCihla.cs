@@ -10,6 +10,7 @@ namespace ZbouraniSkoly2025
 {
     internal class clsCihla
     {
+        // list vsech cihel - mam to delat nejak jinak ale nechtelo se mi to opravovat tak se to naucim takhle
         public List<Rectangle> listRect = new List<Rectangle>();
 
         // kreslici platno
@@ -21,6 +22,8 @@ namespace ZbouraniSkoly2025
         int mintCihlaX, mintCihlaY;
         int mintCihlaWidth, mintCihlaHeight;
         int mintCihlaRozestupX, mintCihlaRozestupY;
+
+        
 
         // barva cihel
         Brush mobjCihlaBrush;
@@ -41,6 +44,8 @@ namespace ZbouraniSkoly2025
             mintCihlaRozestupY = intCihlaRozestupY;
             mobjCihlaRect = new Rectangle(mintCihlaX, mintCihlaY, mintCihlaWidth, mintCihlaHeight);
 
+
+            // vytvoreni vsech cihel - tim jinym zpusobem to funguje asi lip protoze nepotrebuju 2 promenny a cihly se poskladaj samy ale tohle jsem si napsal sam takze to je objektivne lepsi rip bozo
             for (int x = 0; x < intPocetCihelX; x++)
             {
                 mobjCihlaRect.X = x * mintCihlaRozestupX + mintCihlaRozestupX;

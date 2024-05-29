@@ -10,20 +10,21 @@ namespace ZbouraniSkoly2025
 {
     internal class clsKulicka
     {
-        // integery pro pouziti venku
-        public int pintBallX, pintBallY;
-
         // kreslici platno
         Graphics mobjPlatno;
 
         // souradnice kulicky
-        int mintBallX, mintBallY;
-        int mintBallRadius;
+        public int mintBallX, mintBallY;
+        public int mintBallRadius;
+        public Rectangle mobjBallRect;
 
         // posun kulicky
-        int mintBallPosunX, mintBallPosunY;
-        int mintRandomPosun;
+        public int mintBallPosunX, mintBallPosunY;
+        public int mintRandomPosun;
         Random rndPosun;
+
+        // trida cihly
+        clsCihla mobjCihla;
 
         //
         // konstruktor
@@ -36,6 +37,7 @@ namespace ZbouraniSkoly2025
             mintBallPosunX = intBallPosunX;
             mintBallPosunY = intBallPosunY;
             mobjPlatno = objPlatno;
+            mobjBallRect = new Rectangle(mintBallX, mintBallY, mintBallRadius, mintBallRadius);
         }
 
         //
@@ -94,23 +96,6 @@ namespace ZbouraniSkoly2025
                 }
             }
         }
-        //
-        // kolize kulicky s cihalmi
-        //
-        public void KolizeBallAndCihla(int intCihlaX, int intCihlaY, int intCihlaWidth, int intCihlaHeight)
-        {
-
-            if (mintBallY + mintBallRadius < intCihlaY + intCihlaHeight)
-            {
-                if (mintBallX > intCihlaX)
-                {
-                    if (mintBallX < intCihlaX + intCihlaWidth)
-                    {
-                        mintBallPosunY = mintBallPosunY * (-1);
-                        mintBallPosunX = mintBallPosunX + mintRandomPosun;
-                    }
-                }
-            }
-        }
+       
     }
 }
