@@ -140,8 +140,9 @@ namespace ZbouraniSkoly2025
             }  
         }*/
 
-
-
+        //
+        // jina kolize kulicky s cihlou - ma to byt jednodussi ale proste to nefunguje a nemam tuseni proc kdyz to proste funovat ma 
+        //
         private void TestKolizeBallCihla()
         {
             foreach (Rectangle rect in mobjCihla.listRect)
