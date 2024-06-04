@@ -13,7 +13,7 @@ namespace ZbouraniSkoly2025
 {
     public partial class Form1 : Form
     {
-
+        int b;
 
         // hlavni nastroje pro 
         Bitmap mobjMainBitmap;
@@ -132,6 +132,7 @@ namespace ZbouraniSkoly2025
             }
         }
 
+        // zrusi pohyb
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
             mbjOvladam = false;
@@ -140,29 +141,41 @@ namespace ZbouraniSkoly2025
         //
         // jina kolize kulicky s cihlou - ma to byt jednodussi ale proste to nefunguje a nemam tuseni proc kdyz to proste funovat ma 
         //
+        //                      |
+        //                      V
+        //
+        // epicky update - uz to funguje
+        //
         private void TestKolizeBallCihla()
         {
+
+            // plati pro kazdy rect v listu
             foreach (Rectangle rect in mobjCihla.listRect)
             {
                 Rectangle lobjPrekryv;
+
+                // lobjprekryv je rectangle ktery je prostor prekryti dvou jinych rectanglu
                 lobjPrekryv = Rectangle.Intersect(rect, mobjBall.mobjBallRect);
+
+                // kdyz jsou rozmery prekryvu vetsi jak 0, zaznamena se kolize
                 if (lobjPrekryv.Width > 0 && lobjPrekryv.Height > 0)
                 {
                     mobjBall.mintBallPosunY = mobjBall.mintBallPosunY * (-1);
                     mobjBall.mintBallPosunX = mobjBall.mintBallPosunX + mobjBall.mintRandomPosun;
+
+                    // smaze jeden z rectanglu z listu
                     a = mobjCihla.listRect.IndexOf(rect);
                     mbjCihlaNeni = true;
-                }
-                else 
-                {
-                    mbjCihlaNeni = false;
                 }
             }
             if (mbjCihlaNeni == true)
             {
                 mobjCihla.listRect.RemoveAt(a);
+                mbjCihlaNeni = false;
             }
         }
+
+        // popup okynko s koncem hry
         public void StopGame()
         {
             MessageBox.Show("game over");
