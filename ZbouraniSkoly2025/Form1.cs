@@ -13,7 +13,7 @@ namespace ZbouraniSkoly2025
 {
     public partial class Form1 : Form
     {
-      
+
 
         // hlavni nastroje pro 
         Bitmap mobjMainBitmap;
@@ -33,6 +33,16 @@ namespace ZbouraniSkoly2025
 
         // mackam klavesnici
         bool mbjOvladam;
+        bool mbjCihlaNeni;
+
+
+
+        int a;
+
+
+
+
+
 
         public Form1()
         {
@@ -46,13 +56,13 @@ namespace ZbouraniSkoly2025
 
             // vytvoreni grafiky v pictureboxu
             mobjPlatnoGraphics = pbPlatno.CreateGraphics();
-            
+
             // vytvoreni hlavni grafiky
             mobjMainBitmap = new Bitmap(pbPlatno.Width, pbPlatno.Height);
             mobjBitmapGraphics = Graphics.FromImage(mobjMainBitmap);
 
             // nastaveni kulicky
-            mobjBall = new clsKulicka(350, 350, 13, 3, 3, mobjBitmapGraphics);
+            mobjBall = new clsKulicka(600, 350, 13, 3, 3, mobjBitmapGraphics);
 
             // nastaveni plosiny
             mobjPlosina = new clsPlosina((int)(mobjPlatnoGraphics.VisibleClipBounds.Width / 2), 500, 100, 10, 6, mobjBitmapGraphics);
@@ -90,6 +100,14 @@ namespace ZbouraniSkoly2025
 
             // nakresleni na platno
             mobjPlatnoGraphics.DrawImage(mobjMainBitmap, 0, 0);
+            if (mobjBall.tmrStop == true)
+            {
+                tmrRedraw.Enabled = false;
+                if (mobjBall.tmrStop == true)
+                {
+                    StopGame();
+                }
+            }
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs Klavesa)
@@ -118,27 +136,6 @@ namespace ZbouraniSkoly2025
         {
             mbjOvladam = false;
         }
-        //
-        // kolize kulicky s cihalmi - nevim proc nefunguje v clsKulicce ale tady funguje tak to necham tady protoze sem linej to predelavat
-        //
-        /*public void KolizeBallAndCihla()
-        {
-            foreach (Rectangle rect in mobjCihla.listRect)
-            {
-                if (mobjBall.mintBallY + mobjBall.mintBallRadius < rect.Y + rect.Height)
-                {
-                    if (mobjBall.mintBallX > rect.X)
-                    {
-                        if (mobjBall.mintBallX < rect.X + rect.Width)
-                        {
-                            mobjBall.mintBallPosunY = mobjBall.mintBallPosunY * (-1);
-                            mobjBall.mintBallPosunX = mobjBall.mintBallPosunX + mobjBall.mintRandomPosun;
-
-                        }
-                    }
-                }
-            }  
-        }*/
 
         //
         // jina kolize kulicky s cihlou - ma to byt jednodussi ale proste to nefunguje a nemam tuseni proc kdyz to proste funovat ma 
@@ -153,8 +150,22 @@ namespace ZbouraniSkoly2025
                 {
                     mobjBall.mintBallPosunY = mobjBall.mintBallPosunY * (-1);
                     mobjBall.mintBallPosunX = mobjBall.mintBallPosunX + mobjBall.mintRandomPosun;
+                    a = mobjCihla.listRect.IndexOf(rect);
+                    mbjCihlaNeni = true;
+                }
+                else 
+                {
+                    mbjCihlaNeni = false;
                 }
             }
+            if (mbjCihlaNeni == true)
+            {
+                mobjCihla.listRect.RemoveAt(a);
+            }
+        }
+        public void StopGame()
+        {
+            MessageBox.Show("game over");
         }
     }
 }

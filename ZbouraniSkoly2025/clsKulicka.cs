@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -26,6 +27,10 @@ namespace ZbouraniSkoly2025
         // trida cihly
         clsCihla mobjCihla;
 
+        int x = 0;
+
+        public bool tmrStop = false;
+
         //
         // konstruktor
         //
@@ -37,7 +42,6 @@ namespace ZbouraniSkoly2025
             mintBallPosunX = intBallPosunX;
             mintBallPosunY = intBallPosunY;
             mobjPlatno = objPlatno;
-            mobjBallRect = new Rectangle(mintBallX, mintBallY, mintBallRadius, mintBallRadius);
         }
 
         //
@@ -56,8 +60,8 @@ namespace ZbouraniSkoly2025
             // posun kulicky
             mintBallX = mintBallX + mintBallPosunX;
             mintBallY = mintBallY + mintBallPosunY;
+            mobjBallRect = new Rectangle(mintBallX, mintBallY, mintBallRadius, mintBallRadius);
         }
-
         //
         // kolize koule s hranami 
         //
@@ -65,7 +69,7 @@ namespace ZbouraniSkoly2025
         {
             // kolize s hranami obrazovky
             if (mintBallY > mobjPlatno.VisibleClipBounds.Height - mintBallRadius)
-                mintBallPosunY = mintBallPosunY * (-1);
+                tmrStop = true;
 
             if (mintBallY < 0)
                 mintBallPosunY = mintBallPosunY * (-1);
@@ -88,14 +92,15 @@ namespace ZbouraniSkoly2025
                 {
                     if (mintBallX < PlosinaX + PlosinaWidth)
                     {
-                        rndPosun = new Random();
-                        mintRandomPosun = rndPosun.Next(-2, 2);
+                        /*rndPosun = new Random();
+                        mintRandomPosun = rndPosun.Next(-2, 2);*/
                         mintBallPosunY = mintBallPosunY * (-1);
-                        mintBallPosunX = mintBallPosunX + mintRandomPosun;
+                        /*mintBallPosunX = mintBallPosunX + mintRandomPosun;*/
                     }
                 }
             }
-        }
+        }   
+
        
     }
 }
