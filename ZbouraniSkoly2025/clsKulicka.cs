@@ -24,9 +24,7 @@ namespace ZbouraniSkoly2025
         public int mintRandomPosun;
         Random rndPosun;
 
-        int x = 0;
-
-        public bool tmrGameOver = false;
+        public bool mbjGameOver = false;
 
         //
         // konstruktor
@@ -66,7 +64,7 @@ namespace ZbouraniSkoly2025
         {
             // kolize s hranami obrazovky
             if (mintBallY > mobjPlatno.VisibleClipBounds.Height - mintBallRadius)
-                tmrGameOver = true;
+                mbjGameOver = true;
 
             if (mintBallY < 0)
                 mintBallPosunY = mintBallPosunY * (-1);
@@ -89,15 +87,14 @@ namespace ZbouraniSkoly2025
                 {
                     if (mintBallX < PlosinaX + PlosinaWidth)
                     {
-                        /*rndPosun = new Random();
-                        mintRandomPosun = rndPosun.Next(-2, 2);*/
-                        mintBallPosunY = mintBallPosunY * (-1);
-                        /*mintBallPosunX = mintBallPosunX + mintRandomPosun;*/
+                        rndPosun = new Random();
+                        mintRandomPosun = rndPosun.Next(-1, 1);
+                        mintBallPosunY = mintBallPosunY * (-1) - mintRandomPosun;
+                        mintBallPosunX = mintBallPosunX + mintRandomPosun;                        
                     }
                 }
             }
         }   
 
-       
     }
 }

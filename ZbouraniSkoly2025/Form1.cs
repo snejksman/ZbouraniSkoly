@@ -36,8 +36,8 @@ namespace ZbouraniSkoly2025
         bool mbjCihlaNeni;
         int mintRectCislo;
 
-        // veci pro konec hry
-        bool mbjWin;
+        // bool pro start hry
+        bool mbjStart;
         
 
         public Form1()
@@ -48,6 +48,17 @@ namespace ZbouraniSkoly2025
         private void Form1_Load(object sender, EventArgs e)
         {
 
+            // startovaci okynko
+            DialogResult Start = MessageBox.Show("START", "Bourani Skoly", MessageBoxButtons.OKCancel);
+            switch (Start)
+            {
+                case DialogResult.OK:
+                    tmrRedraw.Enabled = true;
+                    break;
+                case DialogResult.Cancel:
+                    Application.Exit();
+                    break;
+            }
             // vytvoreni grafiky v pictureboxu
             mobjPlatnoGraphics = pbPlatno.CreateGraphics();
 
@@ -59,15 +70,14 @@ namespace ZbouraniSkoly2025
             mobjBall = new clsKulicka(600, 350, 13, 4, 4, mobjBitmapGraphics);
 
             // nastaveni plosiny
-            mobjPlosina = new clsPlosina((int)(mobjPlatnoGraphics.VisibleClipBounds.Width / 2), 500, 100, 10, 8, mobjBitmapGraphics);
+            mobjPlosina = new clsPlosina((int)(mobjPlatnoGraphics.VisibleClipBounds.Width / 2), 550, 100, 10, 8, mobjBitmapGraphics);
 
             // nastaveni cihel
             mobjCihla = new clsCihla(8, 5, 20, 20, 120, 40, 20, 10, mobjBitmapGraphics);
 
             // nastaveni timeru
             tmrRedraw.Interval = 30;
-            tmrRedraw.Enabled = true;
-            mbjWin = false;
+
         }
 
         //
@@ -97,7 +107,9 @@ namespace ZbouraniSkoly2025
 
             // nakresleni na platno
             mobjPlatnoGraphics.DrawImage(mobjMainBitmap, 0, 0);
-            if (mobjBall.tmrGameOver == true)
+
+            // vyhra nebo prohra
+            if (mobjBall.mbjGameOver == true)
             {
                 tmrRedraw.Enabled = false;
                 GameOver();
@@ -109,6 +121,9 @@ namespace ZbouraniSkoly2025
             }
         }
 
+        //
+        // ovladani plosiny
+        //
         private void Form1_KeyDown(object sender, KeyEventArgs Klavesa)
         {
             try
@@ -117,6 +132,8 @@ namespace ZbouraniSkoly2025
                 {
                     case Keys.Left:
                         mobjPlosina.PosunLeft();
+
+                        // zastavuje plosiny proti vyjeti doleva
                         if (mobjPlosina.pintPlosinaX < 0)
                         {
                             mbjOvladam = false;
@@ -128,6 +145,8 @@ namespace ZbouraniSkoly2025
                         break;
                     case Keys.Right:
                         mobjPlosina.PosunRight();
+
+                        // zastavuje plosiny proti vyjeti doleva
                         if (mobjPlosina.pintPlosinaX + mobjPlosina.pintPlosinaWidth > mobjPlatnoGraphics.VisibleClipBounds.Width)
                         {
                             mbjOvladam = false;
@@ -152,12 +171,7 @@ namespace ZbouraniSkoly2025
         }
 
         //
-        // jina kolize kulicky s cihlou - ma to byt jednodussi ale proste to nefunguje a nemam tuseni proc kdyz to funovat ma 
-        //
-        //                      |
-        //                      V
-        //
-        // update - uz to funguje
+        // kolize cihel s kulickou
         //
         private void TestKolizeBallCihla()
         {
@@ -179,12 +193,6 @@ namespace ZbouraniSkoly2025
                     // smaze jeden z rectanglu z listu
                     mintRectCislo = mobjCihla.listRect.IndexOf(rect);
                     mbjCihlaNeni = true;
-
-                    // kontroluje pocet zbyvajicich cihel
-                    if (mobjCihla.pintPocetCihel < 2)
-                    {
-                        mbjWin = true;
-                    }
                 }
             }
 
@@ -197,7 +205,7 @@ namespace ZbouraniSkoly2025
             
         }
 
-        // popup okynko s koncem hry
+        // popup okynko s prohrou
         public void GameOver()
         {
             DialogResult Restartovat = MessageBox.Show("chces bourat znova?", "skola porad stoji (prohra)", MessageBoxButtons.YesNo);
@@ -211,6 +219,8 @@ namespace ZbouraniSkoly2025
                     break;
             }
         }
+
+        // popup okynko s vyhrou
         public void GameWin()
         {
             DialogResult Restartovat = MessageBox.Show("chces bourat znova?", "skola uz nestoji (vyhra)", MessageBoxButtons.YesNo);
