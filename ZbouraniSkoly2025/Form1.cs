@@ -30,14 +30,15 @@ namespace ZbouraniSkoly2025
         clsCihla mobjCihla;
 
         // mackam klavesnici
-        bool mbjOvladam;
+        public bool mbjOvladam;
 
         // veci pro mazani cihel
         bool mbjCihlaNeni;
         int mintRectCislo;
 
-        // bool pro vyhru
+        // veci pro konec hry
         bool mbjWin;
+        DialogResult Restartovat;
         
 
         public Form1()
@@ -58,13 +59,13 @@ namespace ZbouraniSkoly2025
             mobjBitmapGraphics = Graphics.FromImage(mobjMainBitmap);
 
             // nastaveni kulicky
-            mobjBall = new clsKulicka(600, 350, 13, 3, 3, mobjBitmapGraphics);
+            mobjBall = new clsKulicka(600, 350, 13, 2, 2, mobjBitmapGraphics);
 
             // nastaveni plosiny
-            mobjPlosina = new clsPlosina((int)(mobjPlatnoGraphics.VisibleClipBounds.Width / 2), 500, 100, 10, 6, mobjBitmapGraphics);
+            mobjPlosina = new clsPlosina((int)(mobjPlatnoGraphics.VisibleClipBounds.Width / 2), 500, 100, 10, 8, mobjBitmapGraphics);
 
             // nastaveni cihel
-            mobjCihla = new clsCihla(1, 1, 100, 100, 120, 40, 130, 50, mobjBitmapGraphics);
+            mobjCihla = new clsCihla(8, 5, 20, 20, 120, 40, 20, 10, mobjBitmapGraphics);
 
             // nastaveni timeru
             tmrRedraw.Interval = 30;
@@ -115,11 +116,25 @@ namespace ZbouraniSkoly2025
                 {
                     case Keys.Left:
                         mobjPlosina.PosunLeft();
-                        mbjOvladam = true;
+                        if (mobjPlosina.pintPlosinaX < 0)
+                        {
+                            mbjOvladam = false;
+                        }
+                        else 
+                        { 
+                            mbjOvladam = true; 
+                        }
                         break;
                     case Keys.Right:
                         mobjPlosina.PosunRight();
-                        mbjOvladam = true;
+                        if (mobjPlosina.pintPlosinaX + mobjPlosina.pintPlosinaWidth > mobjPlatnoGraphics.VisibleClipBounds.Width)
+                        {
+                            mbjOvladam = false;
+                        }
+                        else
+                        {
+                            mbjOvladam = true;
+                        }
                         break;
                 }
             }
@@ -136,12 +151,12 @@ namespace ZbouraniSkoly2025
         }
 
         //
-        // jina kolize kulicky s cihlou - ma to byt jednodussi ale proste to nefunguje a nemam tuseni proc kdyz to proste funovat ma 
+        // jina kolize kulicky s cihlou - ma to byt jednodussi ale proste to nefunguje a nemam tuseni proc kdyz to funovat ma 
         //
         //                      |
         //                      V
         //
-        // epicky update - uz to funguje
+        // update - uz to funguje
         //
         private void TestKolizeBallCihla()
         {
@@ -182,7 +197,7 @@ namespace ZbouraniSkoly2025
             // konec hry (vyhra)
             if (mbjWin == true)
             {
-                MessageBox.Show("bomba vybuchla v reditelne juchu juchu");
+                MessageBox.Show("skola uz nestoji :)");
                 mbjWin = false;
                 tmrRedraw.Enabled = false;
             }
@@ -192,7 +207,16 @@ namespace ZbouraniSkoly2025
         // popup okynko s koncem hry
         public void GameOver()
         {
-            MessageBox.Show("bomb defused (skola porad stoji) D:");
+            Restartovat = MessageBox.Show("chces bourat znova?", "konec", MessageBoxButtons.YesNo);
+            switch (Restartovat)
+            {
+                case DialogResult.Yes:
+                    Application.Restart();
+                    break;
+                case DialogResult.No:
+                    this.Close();
+                    break;
+            }
         }
     }
 }

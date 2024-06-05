@@ -49,10 +49,10 @@ namespace ZbouraniSkoly2025
             // vytvoreni vsech cihel - tim jinym zpusobem to funguje asi lip protoze nepotrebuju 2 promenny a cihly se poskladaj samy ale tohle jsem si napsal sam takze to je objektivne lepsi rip bozo
             for (int x = 0; x < intPocetCihelX; x++)
             {
-                mobjCihlaRect.X = x * mintCihlaRozestupX + mintCihlaRozestupX;
+                mobjCihlaRect.X = x * (mintCihlaWidth + mintCihlaRozestupX) + mintCihlaX;
                 for (int y = 0; y < intPocetCihelY; y++)
                 {
-                    mobjCihlaRect.Y = y * mintCihlaRozestupY + mintCihlaRozestupY;
+                    mobjCihlaRect.Y = y * (mintCihlaHeight + mintCihlaRozestupY) + mintCihlaY;
                     listRect.Add(mobjCihlaRect);
                 }
             }

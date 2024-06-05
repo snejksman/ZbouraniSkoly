@@ -13,6 +13,8 @@ namespace ZbouraniSkoly2025
         // integery pro pouziti venku
         public int pintPlosinaX, pintPlosinaY, pintPlosinaWidth;
 
+        Form1 mobjForm;
+
         // grafika
         Graphics mobjGrafika;
 
@@ -31,6 +33,7 @@ namespace ZbouraniSkoly2025
         //
         public clsPlosina(int intPlosinaX, int intPlosinaY, int intPlosinaWidth, int intPlosinaHeight, int intPlosinaPosun, Graphics objGrafika)
         {
+            mobjForm = new Form1(); 
             pintPlosinaX = mintPlosinaX = intPlosinaX;
             pintPlosinaY = mintPlosinaY = intPlosinaY;
             pintPlosinaWidth = mintPlosinaWidth = intPlosinaWidth;
