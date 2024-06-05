@@ -92,10 +92,10 @@ namespace ZbouraniSkoly2025
                 {
                     if (mintBallX < PlosinaX + PlosinaWidth)
                     {
-                        /*rndPosun = new Random();
-                        mintRandomPosun = rndPosun.Next(-2, 2);*/
+                        rndPosun = new Random();
+                        mintRandomPosun = rndPosun.Next(-2, 2);
                         mintBallPosunY = mintBallPosunY * (-1);
-                        /*mintBallPosunX = mintBallPosunX + mintRandomPosun;*/
+                        mintBallPosunX = mintBallPosunX + mintRandomPosun;
                     }
                 }
             }

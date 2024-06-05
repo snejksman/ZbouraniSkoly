@@ -13,8 +13,6 @@ namespace ZbouraniSkoly2025
 {
     public partial class Form1 : Form
     {
-        int b;
-
         // hlavni nastroje pro 
         Bitmap mobjMainBitmap;
         Graphics mobjBitmapGraphics;
@@ -34,15 +32,7 @@ namespace ZbouraniSkoly2025
         // mackam klavesnici
         bool mbjOvladam;
         bool mbjCihlaNeni;
-
-
-
-        int a;
-
-
-
-
-
+        int mintRectCislo;
 
         public Form1()
         {
@@ -164,13 +154,14 @@ namespace ZbouraniSkoly2025
                     mobjBall.mintBallPosunX = mobjBall.mintBallPosunX + mobjBall.mintRandomPosun;
 
                     // smaze jeden z rectanglu z listu
-                    a = mobjCihla.listRect.IndexOf(rect);
+                    mintRectCislo = mobjCihla.listRect.IndexOf(rect);
                     mbjCihlaNeni = true;
                 }
             }
+            // odstrani jeden rectangle z listu
             if (mbjCihlaNeni == true)
             {
-                mobjCihla.listRect.RemoveAt(a);
+                mobjCihla.listRect.RemoveAt(mintRectCislo);
                 mbjCihlaNeni = false;
             }
         }
