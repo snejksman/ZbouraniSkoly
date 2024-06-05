@@ -31,8 +31,14 @@ namespace ZbouraniSkoly2025
 
         // mackam klavesnici
         bool mbjOvladam;
+
+        // veci pro mazani cihel
         bool mbjCihlaNeni;
         int mintRectCislo;
+
+        // bool pro vyhru
+        bool mbjWin;
+        
 
         public Form1()
         {
@@ -58,11 +64,12 @@ namespace ZbouraniSkoly2025
             mobjPlosina = new clsPlosina((int)(mobjPlatnoGraphics.VisibleClipBounds.Width / 2), 500, 100, 10, 6, mobjBitmapGraphics);
 
             // nastaveni cihel
-            mobjCihla = new clsCihla(7, 4, 100, 100, 120, 40, 130, 50, mobjBitmapGraphics);
+            mobjCihla = new clsCihla(1, 1, 100, 100, 120, 40, 130, 50, mobjBitmapGraphics);
 
             // nastaveni timeru
             tmrRedraw.Interval = 30;
             tmrRedraw.Enabled = true;
+            mbjWin = false;
         }
 
         //
@@ -95,7 +102,7 @@ namespace ZbouraniSkoly2025
                 tmrRedraw.Enabled = false;
                 if (mobjBall.tmrStop == true)
                 {
-                    StopGame();
+                    GameOver();
                 }
             }
         }
@@ -156,20 +163,36 @@ namespace ZbouraniSkoly2025
                     // smaze jeden z rectanglu z listu
                     mintRectCislo = mobjCihla.listRect.IndexOf(rect);
                     mbjCihlaNeni = true;
+
+                    // kontroluje pocet zbyvajicich cihel
+                    if (mobjCihla.pintPocetCihel < 2)
+                    {
+                        mbjWin = true;
+                    }
                 }
             }
+
             // odstrani jeden rectangle z listu
             if (mbjCihlaNeni == true)
             {
                 mobjCihla.listRect.RemoveAt(mintRectCislo);
                 mbjCihlaNeni = false;
             }
+
+            // konec hry (vyhra)
+            if (mbjWin == true)
+            {
+                MessageBox.Show("bomba vybuchla v reditelne juchu juchu");
+                mbjWin = false;
+                tmrRedraw.Enabled = false;
+            }
+            
         }
 
         // popup okynko s koncem hry
-        public void StopGame()
+        public void GameOver()
         {
-            MessageBox.Show("game over");
+            MessageBox.Show("bomb defused (skola porad stoji) D:");
         }
     }
 }

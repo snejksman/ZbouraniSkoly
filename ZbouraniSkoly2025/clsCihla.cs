@@ -12,6 +12,7 @@ namespace ZbouraniSkoly2025
     {
         // list vsech cihel - mam to delat nejak jinak ale nechtelo se mi to opravovat tak se to naucim takhle
         public List<Rectangle> listRect = new List<Rectangle>();
+        public int pintPocetCihel;
 
         // kreslici platno
         Graphics mobjGrafika;
@@ -65,6 +66,7 @@ namespace ZbouraniSkoly2025
             foreach (Rectangle rect in listRect)
             {
                 mobjGrafika.FillRectangle(mobjCihlaBrush, rect);
+                pintPocetCihel = listRect.Count;
             }
         }
     }
