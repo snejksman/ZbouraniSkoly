@@ -17,6 +17,7 @@ namespace ZbouraniSkoly2025
         // kreslici platno
         Graphics mobjGrafika;
 
+        // rectangle do listu
         Rectangle mobjCihlaRect;
 
         // souradnice cihly
@@ -24,11 +25,11 @@ namespace ZbouraniSkoly2025
         int mintCihlaWidth, mintCihlaHeight;
         int mintCihlaRozestupX, mintCihlaRozestupY;
 
-        
+        // bool pro vyhru
+        public bool mbjGameWin;
 
         // barva cihel
         Brush mobjCihlaBrush;
-        Brush mobjCihlaClear;
 
         //
         // konstruktor
@@ -44,7 +45,7 @@ namespace ZbouraniSkoly2025
             mintCihlaRozestupX = intCihlaRozestupX;
             mintCihlaRozestupY = intCihlaRozestupY;
             mobjCihlaRect = new Rectangle(mintCihlaX, mintCihlaY, mintCihlaWidth, mintCihlaHeight);
-
+            mbjGameWin = false;
 
             // vytvoreni vsech cihel - tim jinym zpusobem to funguje asi lip protoze nepotrebuju 2 promenny a cihly se poskladaj samy ale tohle jsem si napsal sam takze to je objektivne lepsi rip bozo
             for (int x = 0; x < intPocetCihelX; x++)
@@ -67,6 +68,10 @@ namespace ZbouraniSkoly2025
             {
                 mobjGrafika.FillRectangle(mobjCihlaBrush, rect);
                 pintPocetCihel = listRect.Count;
+                if (pintPocetCihel < 2)
+                {
+                    mbjGameWin = true;
+                }
             }
         }
     }

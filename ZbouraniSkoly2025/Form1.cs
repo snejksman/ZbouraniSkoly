@@ -38,15 +38,12 @@ namespace ZbouraniSkoly2025
 
         // veci pro konec hry
         bool mbjWin;
-        DialogResult Restartovat;
         
 
         public Form1()
         {
             InitializeComponent();
         }
-
-
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -59,7 +56,7 @@ namespace ZbouraniSkoly2025
             mobjBitmapGraphics = Graphics.FromImage(mobjMainBitmap);
 
             // nastaveni kulicky
-            mobjBall = new clsKulicka(600, 350, 13, 2, 2, mobjBitmapGraphics);
+            mobjBall = new clsKulicka(600, 350, 13, 4, 4, mobjBitmapGraphics);
 
             // nastaveni plosiny
             mobjPlosina = new clsPlosina((int)(mobjPlatnoGraphics.VisibleClipBounds.Width / 2), 500, 100, 10, 8, mobjBitmapGraphics);
@@ -89,7 +86,9 @@ namespace ZbouraniSkoly2025
             // nakresli plosinu a jeji kolize
             mobjPlosina.DrawPlosina();
             if (mbjOvladam == true)
+            {
                 mobjPlosina.MovePlosina();
+            }
             mobjBall.KolizeBallAndPlosina(mobjPlosina.pintPlosinaX, mobjPlosina.pintPlosinaY, mobjPlosina.pintPlosinaWidth);
 
             // nakresli cihly
@@ -98,13 +97,15 @@ namespace ZbouraniSkoly2025
 
             // nakresleni na platno
             mobjPlatnoGraphics.DrawImage(mobjMainBitmap, 0, 0);
-            if (mobjBall.tmrStop == true)
+            if (mobjBall.tmrGameOver == true)
             {
                 tmrRedraw.Enabled = false;
-                if (mobjBall.tmrStop == true)
-                {
-                    GameOver();
-                }
+                GameOver();
+            }
+            if (mobjCihla.mbjGameWin == true)
+            {
+                tmrRedraw.Enabled = false;
+                GameWin();
             }
         }
 
@@ -193,21 +194,26 @@ namespace ZbouraniSkoly2025
                 mobjCihla.listRect.RemoveAt(mintRectCislo);
                 mbjCihlaNeni = false;
             }
-
-            // konec hry (vyhra)
-            if (mbjWin == true)
-            {
-                MessageBox.Show("skola uz nestoji :)");
-                mbjWin = false;
-                tmrRedraw.Enabled = false;
-            }
             
         }
 
         // popup okynko s koncem hry
         public void GameOver()
         {
-            Restartovat = MessageBox.Show("chces bourat znova?", "konec", MessageBoxButtons.YesNo);
+            DialogResult Restartovat = MessageBox.Show("chces bourat znova?", "skola porad stoji (prohra)", MessageBoxButtons.YesNo);
+            switch (Restartovat)
+            {
+                case DialogResult.Yes:
+                    Application.Restart();
+                    break;
+                case DialogResult.No:
+                    this.Close();
+                    break;
+            }
+        }
+        public void GameWin()
+        {
+            DialogResult Restartovat = MessageBox.Show("chces bourat znova?", "skola uz nestoji (vyhra)", MessageBoxButtons.YesNo);
             switch (Restartovat)
             {
                 case DialogResult.Yes:
